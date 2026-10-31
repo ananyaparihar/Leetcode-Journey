@@ -16,13 +16,23 @@ public:
         queue<TreeNode*>q;
         if(root==NULL)return res;
         q.push(root);
+        bool lefttoright=true;
         while(!q.empty()){
             int lvlsize=q.size();
-            vector<int>tmp;
+            vector<int>tmp(lvlsize);
+            int first=0;
+            int last=lvlsize-1;
             while(lvlsize--){
-                TreeNode* t=q.front();
+                TreeNode*t=q.front();
                 q.pop();
-                tmp.push_back(t->val);
+                if(lefttoright){
+                    tmp[first]=t->val;
+                    first++;
+                }else{
+                    tmp[last]=t->val;
+                    last--;
+                }
+                
                 if(t->left!=NULL){
                     q.push(t->left);
                 }
@@ -31,18 +41,8 @@ public:
                 }
             }
             res.push_back(tmp);
+            lefttoright=!lefttoright;
         }
-        vector<vector<int>>res_z;
-        for(int i=0;i<res.size();i++){
-            vector<int>v;
-            v=res[i];
-            if(i%2!=0){
-                std::reverse(v.begin(),v.end());
-                res_z.push_back(v);
-            }else{
-                res_z.push_back(v);
-            }
-        }
-        return res_z;
+        return res; 
     }
 };
