@@ -20,6 +20,7 @@ public:
             if(sum==target){
                 final.push_back(res);
             }
+            res.pop_back(); //backtracking
             return;
         }
         fun(root->left,target,sum,res);
