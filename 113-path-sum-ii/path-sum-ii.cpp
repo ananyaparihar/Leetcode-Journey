@@ -32,10 +32,10 @@ public:
         fun(root->right, target, sum, res);
 
         res.pop_back();  // Backtracking
+        return;
     }
 
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
-        final.clear();
         vector<int> res;
 
         fun(root, targetSum, 0, res);
